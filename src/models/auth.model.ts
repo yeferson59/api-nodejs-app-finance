@@ -1,5 +1,5 @@
 import { typeLogin, typeSignUp } from "@/schemas/auth";
-import UserModel from "./user.model";
+import UserModel from "@/models/user.model";
 import db from "@/config/db";
 import {
   handleErrorResponse,

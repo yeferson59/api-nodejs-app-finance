@@ -1,4 +1,4 @@
-import db from "../config/db";
+import db from "@/config/db";
 import { encryptPassword, setFirstUppercase } from "@/lib/auth-functions";
 import { CreateAdminType } from "@/schemas/admin";
 import { TypeUpdate } from "@/schemas/admin";
