@@ -11,7 +11,7 @@ export const production = false;
 export const DATABASE = {
   user: process.env.DATABASE_USER!,
   database: process.env.DATABASE_USER!,
-  host: process.env.DATABASE_HOST,
-  password: process.env.DATABASE_PASSWORD,
+  host: process.env.DATABASE_HOST!,
+  password: process.env.DATABASE_PASSWORD!,
   port: parseInt(process.env.DATABASE_PORT!),
 };
