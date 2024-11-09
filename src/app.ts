@@ -21,7 +21,7 @@ app.use(
 );
 
 app.use(prefix + "auth", authRouter);
-app.use(prefix + "users", userRouter);
+app.use(prefix + "users", tokenAuthAdmin, userRouter);
 app.use(prefix + "admin", tokenAuthAdmin, adminRouter);
 
 export default app;
