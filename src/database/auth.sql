@@ -47,10 +47,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION update_timestamp_auth_user()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Comprobamos si solo se modificó el campo `last_login`
+  IF NEW.last_login IS DISTINCT FROM OLD.last_login 
+     AND NEW IS DISTINCT FROM OLD THEN
+    -- No hacemos nada si solo cambió `last_login`
+    RETURN NEW;
+  END IF;
+  
+  -- Si cambiaron otros campos, actualizamos `updated_at`
+  NEW.updated_at := NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER update_user_on_change
+-- Crear el trigger en la tabla `auth_user`
+DROP TRIGGER IF EXISTS trigger_update_timestamp_auth_user ON auth_user;
+CREATE TRIGGER trigger_update_timestamp_auth_user
 BEFORE UPDATE ON auth_user
-FOR EACH ROW
-EXECUTE PROCEDURE update_timestamp_updated_at();
+FOR EACH ROW EXECUTE FUNCTION update_timestamp_auth_user();
 
 INSERT INTO AUTH_ROLE(NAME) VALUES('user'), ('admin');
