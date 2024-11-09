@@ -9,17 +9,23 @@ CREATE TABLE IF NOT EXISTS auth_role(
   CONSTRAINT unique_name_auth_role UNIQUE(name)
 );
 
-CREATE TABLE IF NOT EXISTS auth_user(
-  id UUID DEFAULT GEN_RANDOM_UUID() NOT NULL,
-  name VARCHAR(60) NOT NULL,
+CREATE TABLE IF NOT EXISTS auth_user (
+  id UUID DEFAULT gen_random_uuid() NOT NULL,
+  name VARCHAR(60),
   last_name VARCHAR(60),
-  email VARCHAR(90) NOT NULL,
-  password VARCHAR(200) NOT NULL,
+  password VARCHAR(18),
+  email VARCHAR(90) UNIQUE NOT NULL,
+  email_verified TIMESTAMPTZ,
+  image TEXT,
+  phone VARCHAR(20),
+  is_active BOOLEAN DEFAULT true,
+  last_login TIMESTAMPTZ DEFAULT NOW(),
   role_id INT NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
   CONSTRAINT pk_id_auth_user PRIMARY KEY(id),
-  CONSTRAINT unique_email_auth_user UNIQUE(email),
+  CONSTRAINT uk_email_auth_user UNIQUE(email),
+  CONSTRAINT uk_phone_auth_user UNIQUE(phone),
   CONSTRAINT fk_role_id_auth_user FOREIGN KEY(role_id) REFERENCES AUTH_ROLE(id)
 );
 
