@@ -1,13 +1,8 @@
 import pg from "pg";
+import { DATABASE } from "./index";
 
 const { Pool } = pg;
 
-const db = new Pool({
-  user: "postgres",
-  database: "postgres",
-  host: "localhost",
-  password: "1127357",
-  port: 5432,
-});
+const db = new Pool(DATABASE);
 
 export default db;
