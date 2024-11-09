@@ -9,7 +9,7 @@ export const register = async (req: Request, res: Response) => {
   const { name, lastName, email, password } = req.body;
   const validationResult = await createUserSchema.safeParseAsync({
     name,
-    lastName,
+    last_name: lastName,
     email,
     password,
   });
