@@ -1,3 +1,5 @@
+process.loadEnvFile();
+
 export const PORT = parseInt(process.env.PORT!) | 4000;
 
 export const secretToken = process.env.JWT_SECRET!;
