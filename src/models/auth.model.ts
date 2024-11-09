@@ -72,6 +72,11 @@ export default class AuthModel {
         user.role_id,
       ]);
 
+      await db.query("UPDATE AUTH_USER SET last_login = $2 WHERE ID = $1", [
+        user.id,
+        new Date(),
+      ]);
+
       const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
       const session = await tokenCookie({
         userId: user.id,
