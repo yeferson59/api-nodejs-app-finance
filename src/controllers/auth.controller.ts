@@ -4,6 +4,7 @@ import { handleErrorResponse } from "@/lib/auth-functions";
 import db from "@/config/db";
 import createUserSchema from "@/schemas/user";
 import AuthModel from "@/models/auth.model";
+import { CreateAdminSchema } from "@/schemas/admin";
 
 export const register = async (req: Request, res: Response) => {
   const { name, lastName, email, password } = req.body;
@@ -12,6 +13,24 @@ export const register = async (req: Request, res: Response) => {
     last_name: lastName,
     email,
     password,
+  });
+
+  if (!validationResult.success) {
+    handleErrorResponse(res, "Validation error", validationResult.error);
+    return;
+  }
+
+  await AuthModel.register(res, validationResult.data);
+};
+
+export const registerAdmin = async (req: Request, res: Response) => {
+  const { name, lastName, email, password, role } = req.body;
+  const validationResult = await CreateAdminSchema.safeParseAsync({
+    name,
+    last_name: lastName,
+    email,
+    password,
+    role,
   });
 
   if (!validationResult.success) {

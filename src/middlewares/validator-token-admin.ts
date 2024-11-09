@@ -12,8 +12,6 @@ const tokenAuthAdmin = async (
 ) => {
   try {
     const token = req.cookies.token;
-    console.log(token);
-    console.log(req.headers);
 
     // Verify the JWT token
     const payload: Session | undefined = await verifiedToken(
