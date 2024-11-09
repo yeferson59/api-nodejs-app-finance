@@ -13,7 +13,10 @@ const tokenTokenUser = async (
   try {
     const token = req.cookies.token;
 
-    const payload: Session | undefined = await verifiedToken(token, secret);
+    const payload: Session | undefined = await verifiedToken(
+      token ?? "",
+      secret
+    );
 
     if (!payload) {
       res.status(401).json({ message: "Invalid session or token mismatch" });
