@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS auth_role(
 
 CREATE TABLE IF NOT EXISTS auth_user (
   id UUID DEFAULT gen_random_uuid() NOT NULL,
-  name VARCHAR(60),
+  name VARCHAR(60) NOT NULL,
   last_name VARCHAR(60),
-  password VARCHAR(18),
+  password VARCHAR(250) NOT NULL,
   email VARCHAR(90) UNIQUE NOT NULL,
   email_verified TIMESTAMPTZ,
   image TEXT,
