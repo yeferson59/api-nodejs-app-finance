@@ -38,7 +38,7 @@ export const registerAdmin = async (req: Request, res: Response) => {
     return;
   }
 
-  await AuthModel.register(res, validationResult.data);
+  await AuthModel.registerAdmin(res, validationResult.data);
 };
 
 export const login = async (req: Request, res: Response) => {

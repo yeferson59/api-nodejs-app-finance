@@ -53,13 +53,23 @@ export default class AdminModel {
         throw new Error("Role not found");
       }
 
+      const passwordHash = await encryptPassword(createAdmin.password);
+      createAdmin.name = await setFirstUppercase(createAdmin.name);
+      createAdmin.last_name = await setFirstUppercase(createAdmin.last_name);
+
       // Realizar la inserción del admin en la tabla AUTH_USER
       const insertQuery = `
-      INSERT INTO AUTH_USER (NAME, EMAIL, ROLE_ID)
-      VALUES ($1, $2, $3)
+      INSERT INTO AUTH_USER (NAME, LAST_NAME, EMAIL, ROLE_ID, PASSWORD)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
-      const insertValues = [createAdmin.name, createAdmin.email, role.id];
+      const insertValues = [
+        createAdmin.name,
+        createAdmin.last_name,
+        createAdmin.email,
+        role.id,
+        passwordHash,
+      ];
 
       const {
         rows: [admin],
