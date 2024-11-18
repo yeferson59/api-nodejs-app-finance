@@ -7,12 +7,12 @@ import {
   updateAdmin,
 } from "@/controllers/admin.controller";
 
-const adminRouter = Router();
+const router = Router();
 
-adminRouter.get("", getAdmins);
-adminRouter.get("/:id", getAdmin);
-adminRouter.post("", createAdmin);
-adminRouter.patch("/:id", updateAdmin);
-adminRouter.delete("/:id", removeAdmin);
+router.get("", getAdmins);
+router.get("/:id", getAdmin);
+router.post("", createAdmin);
+router.patch("/:id", updateAdmin);
+router.delete("/:id", removeAdmin);
 
-export default adminRouter;
+export default router;

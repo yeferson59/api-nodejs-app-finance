@@ -8,11 +8,11 @@ import {
 import tokenAuthUser from "@/middlewares/validator-token-user";
 import tokenAuthAdmin from "@/middlewares/validator-token-admin";
 
-const authRouter = Router();
+const router = Router();
 
-authRouter.post("/register", register);
-authRouter.post("/login", login);
-authRouter.post("/logout", tokenAuthUser, logout);
-authRouter.post("/register-admin", tokenAuthAdmin, registerAdmin);
+router.post("/register", register);
+router.post("/login", login);
+router.post("/logout", tokenAuthUser, logout);
+router.post("/register-admin", tokenAuthAdmin, registerAdmin);
 
-export default authRouter;
+export default router;

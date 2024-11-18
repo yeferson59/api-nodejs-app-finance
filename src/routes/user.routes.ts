@@ -7,12 +7,12 @@ import {
   updateUser,
 } from "@/controllers/user.controller";
 
-const userRouter = Router();
+const router = Router();
 
-userRouter.get("", getAllUsers);
-userRouter.get("/:id", getUser);
-userRouter.post("", createUser);
-userRouter.patch("/:id", updateUser);
-userRouter.delete("/:id", deleteUser);
+router.get("", getAllUsers);
+router.get("/:id", getUser);
+router.post("", createUser);
+router.patch("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
-export default userRouter;
+export default router;
