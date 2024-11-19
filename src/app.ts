@@ -6,6 +6,8 @@ import tokenAuthAdmin from "@/middlewares/validator-token-admin";
 import cookieParser from "cookie-parser";
 import adminRouter from "@/routes/admin.routes";
 import cors from "cors";
+import tokenTokenUser from "@/middlewares/validator-token-user";
+import marketRouter from "@/routes/market.routes";
 
 const app: Express = express();
 
@@ -23,5 +25,6 @@ app.use(
 app.use(prefix + "auth", authRouter);
 app.use(prefix + "users", tokenAuthAdmin, userRouter);
 app.use(prefix + "admin", tokenAuthAdmin, adminRouter);
+app.use(prefix + "market", tokenTokenUser, marketRouter);
 
 export default app;
