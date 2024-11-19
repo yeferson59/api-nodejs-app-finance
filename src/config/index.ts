@@ -17,3 +17,9 @@ export const DATABASE = {
   password: process.env.DATABASE_PASSWORD!,
   port: parseInt(process.env.DATABASE_PORT ?? "") || 5432,
 } satisfies ClientConfig;
+
+export const apiKeyDemo = process.env.ALPHA_API_KEY_DEMO;
+
+export const apikeyProduction = process.env.ALPHA_VANTAGE_API_KEY;
+
+export const apiUrl = process.env.ALPHA_VANTAGE_API_URL;
